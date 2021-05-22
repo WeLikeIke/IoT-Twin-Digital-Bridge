@@ -1,0 +1,748 @@
+[
+    {
+        "id": "3990c6a1.c2f82a",
+        "type": "tab",
+        "label": "Twin digital bridge",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "226c8060.a156",
+        "type": "mqtt in",
+        "z": "3990c6a1.c2f82a",
+        "name": "",
+        "topic": "status",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "65126e38.f3208",
+        "x": 150,
+        "y": 520,
+        "wires": [
+            [
+                "fa621560.820cf8"
+            ]
+        ]
+    },
+    {
+        "id": "db49a591.a38508",
+        "type": "ui_gauge",
+        "z": "3990c6a1.c2f82a",
+        "name": "",
+        "group": "e880180c.5e45f8",
+        "order": 6,
+        "width": 4,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Wind speed",
+        "label": "m/s",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "120",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "40",
+        "seg2": "80",
+        "x": 610,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "d34ec111.9ab01",
+        "type": "ui_gauge",
+        "z": "3990c6a1.c2f82a",
+        "name": "",
+        "group": "e880180c.5e45f8",
+        "order": 9,
+        "width": 4,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Temperature",
+        "label": "C",
+        "format": "{{value}}",
+        "min": "-30",
+        "max": "70",
+        "colors": [
+            "#7ef3fb",
+            "#00b500",
+            "#ca3838"
+        ],
+        "seg1": "10",
+        "seg2": "40",
+        "x": 610,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "11523286.49869d",
+        "type": "ui_gauge",
+        "z": "3990c6a1.c2f82a",
+        "name": "",
+        "group": "e880180c.5e45f8",
+        "order": 7,
+        "width": 4,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Relative humidity",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 630,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "e1b52047.71b09",
+        "type": "ui_gauge",
+        "z": "3990c6a1.c2f82a",
+        "name": "",
+        "group": "e880180c.5e45f8",
+        "order": 10,
+        "width": 4,
+        "height": 4,
+        "gtype": "wave",
+        "title": "Rain amount",
+        "label": "mm/day",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "3",
+        "seg2": "6",
+        "x": 610,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "b2cd9378.df27e",
+        "type": "switch",
+        "z": "3990c6a1.c2f82a",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "long_rot",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "tran_rot",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "wind",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "temp_air",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "relh_air",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "rain",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 6,
+        "x": 410,
+        "y": 520,
+        "wires": [
+            [
+                "c118d55d.20cbf8"
+            ],
+            [
+                "223884cb.571b1c"
+            ],
+            [
+                "db49a591.a38508"
+            ],
+            [
+                "d34ec111.9ab01"
+            ],
+            [
+                "11523286.49869d"
+            ],
+            [
+                "e1b52047.71b09"
+            ]
+        ]
+    },
+    {
+        "id": "fa621560.820cf8",
+        "type": "split",
+        "z": "3990c6a1.c2f82a",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "topic",
+        "x": 270,
+        "y": 520,
+        "wires": [
+            [
+                "b2cd9378.df27e"
+            ]
+        ]
+    },
+    {
+        "id": "c118d55d.20cbf8",
+        "type": "ui_gauge",
+        "z": "3990c6a1.c2f82a",
+        "name": "",
+        "group": "e880180c.5e45f8",
+        "order": 5,
+        "width": 4,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Longitudinal rotation",
+        "label": "°",
+        "format": "{{value}}",
+        "min": "-30",
+        "max": "30",
+        "colors": [
+            "#ca3838",
+            "#00e608",
+            "#ca3838"
+        ],
+        "seg1": "-5",
+        "seg2": "5",
+        "x": 640,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "223884cb.571b1c",
+        "type": "ui_gauge",
+        "z": "3990c6a1.c2f82a",
+        "name": "",
+        "group": "e880180c.5e45f8",
+        "order": 8,
+        "width": 4,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Transversal rotation",
+        "label": "°",
+        "format": "{{value}}",
+        "min": "-30",
+        "max": "30",
+        "colors": [
+            "#ca3838",
+            "#0ec42c",
+            "#ca3838"
+        ],
+        "seg1": "-5",
+        "seg2": "5",
+        "x": 630,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "4a09982a.ff8b78",
+        "type": "ui_slider",
+        "z": "3990c6a1.c2f82a",
+        "name": "",
+        "label": "Longitudinal rotation",
+        "tooltip": "",
+        "group": "ad187510.0dc298",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": "-30",
+        "max": "30",
+        "step": "0.5",
+        "x": 200,
+        "y": 80,
+        "wires": [
+            [
+                "b32290f6.e4c32"
+            ]
+        ]
+    },
+    {
+        "id": "e4781aa8.d307f8",
+        "type": "ui_slider",
+        "z": "3990c6a1.c2f82a",
+        "name": "",
+        "label": "Transversal rotation",
+        "tooltip": "",
+        "group": "ad187510.0dc298",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": "-30",
+        "max": "30",
+        "step": "0.5",
+        "x": 190,
+        "y": 120,
+        "wires": [
+            [
+                "14d9d375.5199ed"
+            ]
+        ]
+    },
+    {
+        "id": "1bb60c4f.2655f4",
+        "type": "ui_slider",
+        "z": "3990c6a1.c2f82a",
+        "name": "",
+        "label": "Wind speed",
+        "tooltip": "",
+        "group": "ad187510.0dc298",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": 0,
+        "max": "120",
+        "step": 1,
+        "x": 170,
+        "y": 160,
+        "wires": [
+            [
+                "ddd68458.13d008"
+            ]
+        ]
+    },
+    {
+        "id": "5ad82f4a.d1b46",
+        "type": "ui_slider",
+        "z": "3990c6a1.c2f82a",
+        "name": "",
+        "label": "Temperature",
+        "tooltip": "",
+        "group": "ad187510.0dc298",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": "-30",
+        "max": "70",
+        "step": 1,
+        "x": 170,
+        "y": 200,
+        "wires": [
+            [
+                "ac4ca200.c7855"
+            ]
+        ]
+    },
+    {
+        "id": "f934af70.bc24f",
+        "type": "ui_slider",
+        "z": "3990c6a1.c2f82a",
+        "name": "",
+        "label": "Relative humidity",
+        "tooltip": "",
+        "group": "ad187510.0dc298",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": 0,
+        "max": "100",
+        "step": 1,
+        "x": 190,
+        "y": 240,
+        "wires": [
+            [
+                "e2019d27.55058"
+            ]
+        ]
+    },
+    {
+        "id": "b60f522c.10f86",
+        "type": "ui_slider",
+        "z": "3990c6a1.c2f82a",
+        "name": "",
+        "label": "Rain amount",
+        "tooltip": "",
+        "group": "ad187510.0dc298",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": 0,
+        "max": "100",
+        "step": 1,
+        "x": 170,
+        "y": 280,
+        "wires": [
+            [
+                "1f388ea3.cbf4a1"
+            ]
+        ]
+    },
+    {
+        "id": "b32290f6.e4c32",
+        "type": "change",
+        "z": "3990c6a1.c2f82a",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "template.long_rot",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "14d9d375.5199ed",
+        "type": "change",
+        "z": "3990c6a1.c2f82a",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "template.tran_rot",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ddd68458.13d008",
+        "type": "change",
+        "z": "3990c6a1.c2f82a",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "template.wind",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 420,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ac4ca200.c7855",
+        "type": "change",
+        "z": "3990c6a1.c2f82a",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "template.temp_air",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e2019d27.55058",
+        "type": "change",
+        "z": "3990c6a1.c2f82a",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "template.relh_air",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1f388ea3.cbf4a1",
+        "type": "change",
+        "z": "3990c6a1.c2f82a",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "template.rain",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 420,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4c2fc03.e36aa4",
+        "type": "ui_toast",
+        "z": "3990c6a1.c2f82a",
+        "position": "top right",
+        "displayTime": "1.5",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "topic": "",
+        "name": "",
+        "x": 980,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "3a4bf596.ebdaba",
+        "type": "change",
+        "z": "3990c6a1.c2f82a",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Values Sent!",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 120,
+        "wires": [
+            [
+                "4c2fc03.e36aa4"
+            ]
+        ]
+    },
+    {
+        "id": "4e642217.b5e44c",
+        "type": "mqtt out",
+        "z": "3990c6a1.c2f82a",
+        "name": "",
+        "topic": "status",
+        "qos": "",
+        "retain": "",
+        "broker": "65126e38.f3208",
+        "x": 950,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "cc68d68e.03db58",
+        "type": "ui_button",
+        "z": "3990c6a1.c2f82a",
+        "name": "",
+        "group": "ad187510.0dc298",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "send",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "template",
+        "payloadType": "flow",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 630,
+        "y": 160,
+        "wires": [
+            [
+                "4e642217.b5e44c",
+                "3a4bf596.ebdaba"
+            ]
+        ]
+    },
+    {
+        "id": "ec2ff0f9.76b4a",
+        "type": "ui_text",
+        "z": "3990c6a1.c2f82a",
+        "group": "e880180c.5e45f8",
+        "order": 1,
+        "width": 4,
+        "height": 1,
+        "name": "",
+        "label": "Rotations",
+        "format": "",
+        "layout": "col-center",
+        "x": 780,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "b4571030.bd16c",
+        "type": "ui_text",
+        "z": "3990c6a1.c2f82a",
+        "group": "e880180c.5e45f8",
+        "order": 3,
+        "width": 4,
+        "height": 1,
+        "name": "",
+        "label": "Weather",
+        "format": "",
+        "layout": "col-center",
+        "x": 820,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "65126e38.f3208",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "test.mosquitto.org",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "e880180c.5e45f8",
+        "type": "ui_group",
+        "name": "Gauges",
+        "tab": "2c91f384.f52dfc",
+        "order": 4,
+        "disp": true,
+        "width": "12",
+        "collapse": false
+    },
+    {
+        "id": "ad187510.0dc298",
+        "type": "ui_group",
+        "name": "Values",
+        "tab": "27392637.24c19a",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "2c91f384.f52dfc",
+        "type": "ui_tab",
+        "name": "Twin digital bridge",
+        "icon": "check",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "27392637.24c19a",
+        "type": "ui_tab",
+        "name": "Real life simulation",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    }
+]
