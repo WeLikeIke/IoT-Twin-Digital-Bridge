@@ -117,7 +117,7 @@ void loop()
   String data = payload.printTo(data);
   
   //Attempt to publish the readings
-  if(!mqttClient.publish("status", data))
+  if(!mqttClient.publish("TDB/Readings", data))
   {
     //IF IT FAILS TROUBLESHOOTING WILL BE NEEDED
   }
