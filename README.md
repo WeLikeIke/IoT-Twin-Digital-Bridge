@@ -27,7 +27,7 @@ The project can be divided into 4 parts:
 ## The system backbone 
 <img src="/Media/nodejs_logo.png" width="10%" height="10%"> + <img src="/Media/node-red_logo.png" width="10%" height="10%">
 
-The backbone has been developed with [Node-red](https://nodered.org/), a visual programming tool that makes creating projects like this much easier.
+The backbone has been developed with Node-red, a visual programming tool that makes creating projects like this much easier.
 
 When the Node-red builtin nodes wouldn't work for a specific use case (and that's, most of the time, inevitable) it is possible to write javascript (Nodejs) code in the builtin `function node`.
 
@@ -70,6 +70,25 @@ What we were able to do:
 ![hardware](Sensor_Schematic.png)
 [Here is the Tinkercad link](https://www.tinkercad.com/things/iA9xcBoBmd5-twindigitalbridge-sensor)
 
+**To Note:**
+
+The hardware missing in the schematics are:
+
+<img src="/Media/Ethernet-Shield.png" width="30%" height="30%">
+
+The Ethernet shield for the MQTT communication
+
+<img src="/Media/Anemometer.png" width="30%" height="30%">
+
+An Anemometer to measure wind speed (substituting a potentiometer)
+
+<img src="/Media/Rain-sensor.png" width="30%" height="30%">
+
+A rain sensor to measure the rain amount (substituting the other potentiometer)
+
+<img src="/Media/DHT22.png" width="30%" height="30%">
+
+Lastly a DHT22 sensor for temperature and humidity (substituting the temperature sensor)
  
  ## The system persistency
 <img src="/Media/sqlite_logo.png" width="10%" height="10%"> + <img src="/Media/mqtt_logo.png" width="10%" height="10%">
@@ -87,6 +106,8 @@ The contents of all of these are self-explanatory and a flow can also be accesse
 
 ![db_flow](/Media/DB_node-red.png)
 This is the flow that handles the commands sent to the database and the entries returned by them, alongside the administrator part. (with node-red buttons)
+
+The database is populated with a very small toy example, it can be wiped, created and repopulated from this persistency flow.
 
 ## The system dashboard
 <img src="/Media/node-red-dashboard_logo.png" width="10%" height="10%"> + <img src="/Media/angularjs_logo.png" width="10%" height="10%">
@@ -116,6 +137,29 @@ This is a part of said template node for the alert form.
  * About possible future improvements:
     * There are many, here's some:
        * Make the Node-red parts of the system secure
-       * 
-
+       * Separate the main machine from the dashboard, by implementing some consistency policy
+       * Test, compile, fix and improve the sensor part, since we weren't able to do it at all
+       * Figure out a smart solution for the detection of malfunctioning sensors
+       * Increasing the power over the database of an admin, data removal, sorting or even on the fly tables restructurings
+       * Distribute the data on multiple databases and protect it, for example with redundancy
+       * Take the necessary precautions to render safe the MQTT connects, currently anyone that knows the topic could eavesdrop
+       * Move away from the public mosquitto broker
+ * What about a demo?
+   * In the same directory it is possible to find:
+       * A powerpoint presentation of the project
+       * A video demo of the project and code 
 ## Try it yourself
+![dependencies](/Media/Libraries.png)
+Requires:
+ * [Node-red](https://nodered.org/)
+ * [Node-red Dashboard](https://flows.nodered.org/node/node-red-dashboard)
+ * [The Table node](https://flows.nodered.org/node/node-red-node-ui-table)
+ * [The Date formatter node](https://flows.nodered.org/node/node-red-contrib-moment)
+ * [The SQLite node](https://flows.nodered.org/node/node-red-node-sqlite)
+
+To run:
+* Open node-red from terminal **in the directory "IoT-Twin-Digital-Bridge"**.
+* Open localhost:1880 for the flows and localhost:1880/ui for the dashboard.
+* Anything can now be executed from the dashboard alone, the sensors can be simulated in the first tab.
+
+![tabs](/Media/Tabs.png)
