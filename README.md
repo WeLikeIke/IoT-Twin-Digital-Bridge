@@ -3,6 +3,15 @@
 ## Project for the Internet of Things course 2020/2021 Universita' di Genova
 #### By Arezou Ranjbarpour Maralani & Lorenzo Tibaldi 
 
+* [Introduction](#introduction)
+* Main parts
+  * [The system backbone](#the-system-backbone)
+  * [The sensors' design](#the-sensors-design)
+  * [The system persistency](#the-system-persistency)
+  * [The system dashboard](#the-system-dashboard)
+* [Final remarks](#final-remarks)
+* [Try it yourself](#try-it-yourself)
+
 ## Introduction
 The goal of this project was to create a prototype for a realtime infrastructure monitoring system.
 
@@ -30,6 +39,7 @@ The flow can be split horizontaly in 2 parts:
 * The actual logic part
 
 The first part is designed as a developer tool to test a sensor reading, it is completely customizable so that the logic of alert triggering could also be tested with it.
+![sensorsim](/Media/Dashboard_tab1.png)
 
 The second part consists of:
 * Inserting a timestamp to the reading. (to reduce the complexity of the sensors, they themselves cannot timestamp a reading before sending it)
@@ -74,5 +84,38 @@ What we were able to do:
 ![databases](/Media/ER-diagram.png)
 
 The contents of all of these are self-explanatory and a flow can also be accessed by an administrator of the system to perform actions on the database. (like wiping, recreating and populating with a small group of test entries)
-![db_flow](/Media/DB_node-red.png)
 
+![db_flow](/Media/DB_node-red.png)
+This is the flow that handles the commands sent to the database and the entries returned by them, alongside the administrator part. (with node-red buttons)
+
+## The system dashboard
+<img src="/Media/node-red-dashboard_logo.png" width="10%" height="10%"> + <img src="/Media/angularjs_logo.png" width="10%" height="10%">
+
+The development of the dashboard takes advantage of the easy to use Node-red dashboard nodes
+![dashboard](/Media/Dashboard_node-red.png)
+
+For our specific use cases there were a few instances where we had to take advantage of the powerful `template node`, that let us write some angularjs code to meet our needs.
+![dashboard](/Media/Alerts_node-red.png)
+
+The most important `template node` was used during the creation of the alert form.
+
+We needed to put together a form that would only create alerts if they are in the valid format:
+* Non empty submitter and message fields
+* At least one condition required
+* Any condition must be complete (e.g. "temperature less than" MUST be followed by a valid number)
+* Either all sensors should be checked OR a sensor must be specified
+
+![angularcode](/Media/Angular_code.png)
+This is a part of said template node for the alert form.
+
+## Final remarks
+* About the communications between parts:
+   * Everything takes advantage of the very efficient MQTT protocol, the sensors send a single lightweght JSON file and the different topics keep the information flow ordered and correct.
+ * About the Node-red libraries:
+   * We felt like it made no sense to write completely from scratch the details for visualization, persistency or utilities; in the next section you will find a list of all the libraries that have been used.
+ * About possible future improvements:
+    * There are many, here's some:
+       * Make the Node-red parts of the system secure
+       * 
+
+## Try it yourself
