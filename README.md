@@ -146,8 +146,9 @@ This is a part of said template node for the alert form.
        * Move away from the public mosquitto broker
  * What about a demo?
    * In the same directory it is possible to find:
-       * A powerpoint presentation of the project
-       * A video demo of the project and code 
+       * A powerpoint presentation of the project (IoT-Twin-Digital-Bridge-proposal.pptx)
+   * And at the next link:
+       * [A video of the above plus code and demo](https)
 ## Try it yourself
 ![dependencies](/Media/Libraries.png)
 Requires:
@@ -155,7 +156,7 @@ Requires:
  * [Node-red Dashboard](https://flows.nodered.org/node/node-red-dashboard)
  * [The Table node](https://flows.nodered.org/node/node-red-node-ui-table)
  * [The Date formatter node](https://flows.nodered.org/node/node-red-contrib-moment)
- * [The SQLite node](https://flows.nodered.org/node/node-red-node-sqlite)
+ * [The SQLite node](https://flows.nodered.org/node/node-red-node-sqlite) (this one requires a couple of additional dependencies)
 
 To run:
 * Open node-red from terminal **in the directory "IoT-Twin-Digital-Bridge"**.
