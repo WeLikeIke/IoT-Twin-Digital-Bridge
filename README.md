@@ -148,7 +148,7 @@ This is a part of said template node for the alert form.
    * In the same directory it is possible to find:
        * A powerpoint presentation of the project (IoT-Twin-Digital-Bridge-proposal.pptx)
    * And at the next link:
-       * [A video of the above plus code and demo](https)
+       * [A video of the above plus code and demo](https://drive.google.com/file/d/12OgUWVyHIr_j2T8h2hzpL3xY0nMb9_JT/view?usp=sharing)
 ## Try it yourself
 ![dependencies](/Media/Libraries.png)
 Requires:
